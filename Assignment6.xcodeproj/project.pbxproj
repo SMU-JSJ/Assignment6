@@ -9,11 +9,17 @@
 /* Begin PBXBuildFile section */
 		68F740671AD5DDCE00DB2F7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F740661AD5DDCE00DB2F7C /* main.m */; };
 		68F7406A1AD5DDCE00DB2F7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F740691AD5DDCE00DB2F7C /* AppDelegate.m */; };
-		68F7406D1AD5DDCE00DB2F7C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7406C1AD5DDCE00DB2F7C /* ViewController.m */; };
 		68F740701AD5DDCE00DB2F7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68F7406E1AD5DDCE00DB2F7C /* Main.storyboard */; };
 		68F740721AD5DDCE00DB2F7C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68F740711AD5DDCE00DB2F7C /* Images.xcassets */; };
 		68F740751AD5DDCE00DB2F7C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F740731AD5DDCE00DB2F7C /* LaunchScreen.xib */; };
 		68F740811AD5DDCE00DB2F7C /* Assignment6Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F740801AD5DDCE00DB2F7C /* Assignment6Tests.m */; };
+		68F7408C1AD60F7C00DB2F7C /* TrainingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7408B1AD60F7C00DB2F7C /* TrainingTableViewController.m */; };
+		68F7408F1AD6101200DB2F7C /* SpellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7408E1AD6101200DB2F7C /* SpellTableViewCell.m */; };
+		68F740921AD610E600DB2F7C /* ResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F740911AD610E600DB2F7C /* ResultsTableViewCell.m */; };
+		68F740951AD612B800DB2F7C /* TestingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F740941AD612B800DB2F7C /* TestingViewController.m */; };
+		68F740981AD612E700DB2F7C /* AlgorithmsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F740971AD612E700DB2F7C /* AlgorithmsTableViewController.m */; };
+		68F7409B1AD6130300DB2F7C /* ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7409A1AD6130300DB2F7C /* ResultsTableViewController.m */; };
+		68F7409E1AD6135100DB2F7C /* TrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7409D1AD6135100DB2F7C /* TrainingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +38,26 @@
 		68F740661AD5DDCE00DB2F7C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		68F740681AD5DDCE00DB2F7C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		68F740691AD5DDCE00DB2F7C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		68F7406B1AD5DDCE00DB2F7C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		68F7406C1AD5DDCE00DB2F7C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		68F7406F1AD5DDCE00DB2F7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		68F740711AD5DDCE00DB2F7C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		68F740741AD5DDCE00DB2F7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		68F7407A1AD5DDCE00DB2F7C /* Assignment6Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment6Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F7407F1AD5DDCE00DB2F7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68F740801AD5DDCE00DB2F7C /* Assignment6Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Assignment6Tests.m; sourceTree = "<group>"; };
+		68F7408A1AD60F7C00DB2F7C /* TrainingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingTableViewController.h; sourceTree = "<group>"; };
+		68F7408B1AD60F7C00DB2F7C /* TrainingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingTableViewController.m; sourceTree = "<group>"; };
+		68F7408D1AD6101200DB2F7C /* SpellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpellTableViewCell.h; sourceTree = "<group>"; };
+		68F7408E1AD6101200DB2F7C /* SpellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpellTableViewCell.m; sourceTree = "<group>"; };
+		68F740901AD610E600DB2F7C /* ResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewCell.h; sourceTree = "<group>"; };
+		68F740911AD610E600DB2F7C /* ResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewCell.m; sourceTree = "<group>"; };
+		68F740931AD612B800DB2F7C /* TestingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingViewController.h; sourceTree = "<group>"; };
+		68F740941AD612B800DB2F7C /* TestingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingViewController.m; sourceTree = "<group>"; };
+		68F740961AD612E700DB2F7C /* AlgorithmsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlgorithmsTableViewController.h; sourceTree = "<group>"; };
+		68F740971AD612E700DB2F7C /* AlgorithmsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlgorithmsTableViewController.m; sourceTree = "<group>"; };
+		68F740991AD6130300DB2F7C /* ResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewController.h; sourceTree = "<group>"; };
+		68F7409A1AD6130300DB2F7C /* ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewController.m; sourceTree = "<group>"; };
+		68F7409C1AD6135100DB2F7C /* TrainingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingViewController.h; sourceTree = "<group>"; };
+		68F7409D1AD6135100DB2F7C /* TrainingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,9 +101,21 @@
 			children = (
 				68F740681AD5DDCE00DB2F7C /* AppDelegate.h */,
 				68F740691AD5DDCE00DB2F7C /* AppDelegate.m */,
-				68F7406B1AD5DDCE00DB2F7C /* ViewController.h */,
-				68F7406C1AD5DDCE00DB2F7C /* ViewController.m */,
 				68F7406E1AD5DDCE00DB2F7C /* Main.storyboard */,
+				68F7408A1AD60F7C00DB2F7C /* TrainingTableViewController.h */,
+				68F7408B1AD60F7C00DB2F7C /* TrainingTableViewController.m */,
+				68F7409C1AD6135100DB2F7C /* TrainingViewController.h */,
+				68F7409D1AD6135100DB2F7C /* TrainingViewController.m */,
+				68F740931AD612B800DB2F7C /* TestingViewController.h */,
+				68F740941AD612B800DB2F7C /* TestingViewController.m */,
+				68F740961AD612E700DB2F7C /* AlgorithmsTableViewController.h */,
+				68F740971AD612E700DB2F7C /* AlgorithmsTableViewController.m */,
+				68F740991AD6130300DB2F7C /* ResultsTableViewController.h */,
+				68F7409A1AD6130300DB2F7C /* ResultsTableViewController.m */,
+				68F7408D1AD6101200DB2F7C /* SpellTableViewCell.h */,
+				68F7408E1AD6101200DB2F7C /* SpellTableViewCell.m */,
+				68F740901AD610E600DB2F7C /* ResultsTableViewCell.h */,
+				68F740911AD610E600DB2F7C /* ResultsTableViewCell.m */,
 				68F740711AD5DDCE00DB2F7C /* Images.xcassets */,
 				68F740731AD5DDCE00DB2F7C /* LaunchScreen.xib */,
 				68F740641AD5DDCE00DB2F7C /* Supporting Files */,
@@ -219,9 +249,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68F7406D1AD5DDCE00DB2F7C /* ViewController.m in Sources */,
+				68F7408F1AD6101200DB2F7C /* SpellTableViewCell.m in Sources */,
+				68F7409B1AD6130300DB2F7C /* ResultsTableViewController.m in Sources */,
 				68F7406A1AD5DDCE00DB2F7C /* AppDelegate.m in Sources */,
+				68F740981AD612E700DB2F7C /* AlgorithmsTableViewController.m in Sources */,
 				68F740671AD5DDCE00DB2F7C /* main.m in Sources */,
+				68F740921AD610E600DB2F7C /* ResultsTableViewCell.m in Sources */,
+				68F740951AD612B800DB2F7C /* TestingViewController.m in Sources */,
+				68F7409E1AD6135100DB2F7C /* TrainingViewController.m in Sources */,
+				68F7408C1AD60F7C00DB2F7C /* TrainingTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
