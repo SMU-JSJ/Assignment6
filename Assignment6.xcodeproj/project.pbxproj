@@ -22,6 +22,7 @@
 		68F7409E1AD6135100DB2F7C /* TrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7409D1AD6135100DB2F7C /* TrainingViewController.m */; };
 		EFB9A4D41ADB087300C44AF1 /* SpellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9A4D31ADB087300C44AF1 /* SpellModel.m */; };
 		EFB9A4D71ADB08D300C44AF1 /* Spell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9A4D61ADB08D300C44AF1 /* Spell.m */; };
+		EFB9A4DA1ADB1D6B00C44AF1 /* RingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9A4D91ADB1D6B00C44AF1 /* RingBuffer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		EFB9A4D31ADB087300C44AF1 /* SpellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpellModel.m; sourceTree = "<group>"; };
 		EFB9A4D51ADB08D300C44AF1 /* Spell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spell.h; sourceTree = "<group>"; };
 		EFB9A4D61ADB08D300C44AF1 /* Spell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spell.m; sourceTree = "<group>"; };
+		EFB9A4D81ADB1D6B00C44AF1 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
+		EFB9A4D91ADB1D6B00C44AF1 /* RingBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RingBuffer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,8 @@
 				68F740681AD5DDCE00DB2F7C /* AppDelegate.h */,
 				68F740691AD5DDCE00DB2F7C /* AppDelegate.m */,
 				68F7406E1AD5DDCE00DB2F7C /* Main.storyboard */,
+				EFB9A4D81ADB1D6B00C44AF1 /* RingBuffer.h */,
+				EFB9A4D91ADB1D6B00C44AF1 /* RingBuffer.m */,
 				EFB9A4D21ADB087300C44AF1 /* SpellModel.h */,
 				EFB9A4D31ADB087300C44AF1 /* SpellModel.m */,
 				EFB9A4D51ADB08D300C44AF1 /* Spell.h */,
@@ -265,6 +270,7 @@
 				EFB9A4D71ADB08D300C44AF1 /* Spell.m in Sources */,
 				68F7406A1AD5DDCE00DB2F7C /* AppDelegate.m in Sources */,
 				68F740981AD612E700DB2F7C /* AlgorithmsTableViewController.m in Sources */,
+				EFB9A4DA1ADB1D6B00C44AF1 /* RingBuffer.m in Sources */,
 				68F740671AD5DDCE00DB2F7C /* main.m in Sources */,
 				68F740921AD610E600DB2F7C /* ResultsTableViewCell.m in Sources */,
 				68F740951AD612B800DB2F7C /* TestingViewController.m in Sources */,
