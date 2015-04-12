@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="qP1-uM-uXp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="qP1-uM-uXp">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -141,7 +141,6 @@
         <!--Training-->
         <scene sceneID="9YS-5D-8M1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FCa-p6-kKL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MAQ-6U-PEY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Training" id="qBb-JZ-kSp"/>
                     <toolbarItems/>
@@ -154,6 +153,7 @@
                         <segue destination="9AV-GX-2VM" kind="relationship" relationship="rootViewController" id="Tyy-JI-6GG"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FCa-p6-kKL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="738" y="364"/>
         </scene>
@@ -189,6 +189,9 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="spelLTranslationLabel" destination="yhB-JM-ITC" id="g1j-OX-6cs"/>
+                                    <outlet property="spellImageView" destination="lho-iH-uTK" id="R5y-Ip-cCe"/>
+                                    <outlet property="spellNameLabel" destination="wbx-ng-rcx" id="EWx-18-t3S"/>
                                     <segue destination="LEA-Om-Iup" kind="push" id="yEn-du-88x"/>
                                 </connections>
                             </tableViewCell>
@@ -217,25 +220,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spell Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFp-CU-vx1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" text="Spell Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFp-CU-vx1">
                                 <rect key="frame" x="16" y="72" width="85" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9C-Qa-g3d">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Lorem ipsum dolor sit amet, consectetur adipi" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9C-Qa-g3d">
                                 <rect key="frame" x="16" y="99" width="288" height="82"/>
-                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porta in dolor quis placerat. Donec consectetur sem eu sagittis pharetra. Fusce convallis, ante nec scelerisque varius, ipsum eros finibus erat, et maximus sem sapien vitae dui. </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiY-fI-peQ">
                                 <rect key="frame" x="55" y="456" width="211" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="YzR-6Z-DZx"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                 <state key="normal" title="Start Casting">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="startStopCasting:" destination="LEA-Om-Iup" eventType="touchUpInside" id="cN7-QM-GL2"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mentem_curro" translatesAutoresizingMaskIntoConstraints="NO" id="NhU-8m-blS">
                                 <rect key="frame" x="31" y="189" width="259" height="259"/>
@@ -243,15 +251,24 @@
                                     <constraint firstAttribute="width" secondItem="NhU-8m-blS" secondAttribute="height" multiplier="1:1" id="FBk-rG-x93"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" text="Spell Translation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KV-6X-jBm">
+                                <rect key="frame" x="197" y="72" width="107" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="IiY-fI-peQ" secondAttribute="centerX" constant="-0.5" id="5jM-S7-fuO"/>
                             <constraint firstItem="P9C-Qa-g3d" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" id="Owf-1r-xuc"/>
                             <constraint firstItem="dFp-CU-vx1" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" constant="8" id="Ryc-uG-JfP"/>
+                            <constraint firstItem="1KV-6X-jBm" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" constant="8" id="Rz6-Hu-GB1"/>
+                            <constraint firstItem="dFp-CU-vx1" firstAttribute="centerY" secondItem="1KV-6X-jBm" secondAttribute="centerY" constant="-0.5" id="Tld-Dq-uky"/>
                             <constraint firstAttribute="centerX" secondItem="NhU-8m-blS" secondAttribute="centerX" constant="-0.5" id="XcQ-1N-qZ9"/>
                             <constraint firstItem="dFp-CU-vx1" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" id="XwV-BE-kW4"/>
                             <constraint firstItem="NhU-8m-blS" firstAttribute="top" secondItem="P9C-Qa-g3d" secondAttribute="bottom" constant="8" id="a3m-zM-AQf"/>
+                            <constraint firstItem="1KV-6X-jBm" firstAttribute="trailing" secondItem="RVm-9I-aeh" secondAttribute="trailingMargin" id="c73-cI-X48"/>
                             <constraint firstItem="P9C-Qa-g3d" firstAttribute="top" secondItem="dFp-CU-vx1" secondAttribute="bottom" constant="7" id="gJX-WI-bgJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NhU-8m-blS" secondAttribute="trailing" constant="14" id="hGk-rW-H9a"/>
                             <constraint firstItem="IiY-fI-peQ" firstAttribute="top" secondItem="NhU-8m-blS" secondAttribute="bottom" constant="8" id="haQ-W3-9ut"/>
@@ -266,6 +283,7 @@
                         <outlet property="spellDescriptionLabel" destination="P9C-Qa-g3d" id="JSe-vf-ccP"/>
                         <outlet property="spellImageView" destination="NhU-8m-blS" id="Nhf-lC-Twz"/>
                         <outlet property="spellNameLabel" destination="dFp-CU-vx1" id="fzi-qQ-OFN"/>
+                        <outlet property="spellTranslationLabel" destination="1KV-6X-jBm" id="Tcx-FE-IpV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pQY-HK-3pv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -294,7 +312,6 @@
         <!--Training Accuracy Results-->
         <scene sceneID="KOE-I9-PYi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uCU-se-UaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Zzl-Ef-jot" customClass="AlgorithmsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lkO-ha-bTv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -347,6 +364,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Training Accuracy Results" id="4sA-sX-A3M"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uCU-se-UaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1270" y="1682"/>
         </scene>

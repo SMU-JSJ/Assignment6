@@ -6,12 +6,26 @@
 //
 
 #import "TrainingTableViewController.h"
+#import "SpellModel.h"
+#import "Spell.h"
+#import "SpellTableViewCell.h"
+#import "TrainingViewController.h"
 
 @interface TrainingTableViewController ()
+
+@property (strong, nonatomic) SpellModel* spellModel;
 
 @end
 
 @implementation TrainingTableViewController
+
+// Gets an instance of the SpellModel class using lazy instantiation
+- (SpellModel*) spellModel {
+    if(!_spellModel)
+        _spellModel = [SpellModel sharedInstance];
+    
+    return _spellModel;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,69 +45,88 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    if (section == 0) {
+        return [self.spellModel.attackSpells count];
+    } else if (section == 1) {
+        return [self.spellModel.healingSpells count];
+    } else {
+        return [self.spellModel.defenseSpells count];
+    }
 }
 
-/*
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionName;
+    switch (section)
+    {
+        case 0:
+            sectionName = @"Attack Spells";
+            break;
+        case 1:
+            sectionName = @"Healing Spells";
+            break;
+        case 2:
+            sectionName = @"Defense Spells";
+            break;
+        default:
+            sectionName = @"";
+            break;
+    }
+    return sectionName;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    SpellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpellTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    Spell* spell;
+    if (indexPath.section == 0) {
+        spell = self.spellModel.attackSpells[indexPath.row];
+    } else if (indexPath.section == 1) {
+        spell = self.spellModel.healingSpells[indexPath.row];
+    } else {
+        spell = self.spellModel.defenseSpells[indexPath.row];
+    }
+    
+    cell.spellImageView.image = [UIImage imageNamed:spell.name];
+    cell.spellNameLabel.text = spell.name;
+    cell.spelLTranslationLabel.text = spell.translation;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    BOOL isVC = [[segue destinationViewController] isKindOfClass:[TrainingViewController class]];
+    
+    if(isVC) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        TrainingViewController *vc = [segue destinationViewController];
+        
+        Spell* spell;
+        if (indexPath.section == 0) {
+            spell = self.spellModel.attackSpells[indexPath.row];
+        } else if (indexPath.section == 1) {
+            spell = self.spellModel.healingSpells[indexPath.row];
+        } else {
+            spell = self.spellModel.defenseSpells[indexPath.row];
+        }
+        vc.spellName = spell.name;
+        vc.spellTranslation = spell.translation;
+        vc.spellDescription = spell.desc;
+    }
 }
-*/
 
 @end

@@ -20,6 +20,8 @@
 		68F740981AD612E700DB2F7C /* AlgorithmsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F740971AD612E700DB2F7C /* AlgorithmsTableViewController.m */; };
 		68F7409B1AD6130300DB2F7C /* ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7409A1AD6130300DB2F7C /* ResultsTableViewController.m */; };
 		68F7409E1AD6135100DB2F7C /* TrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7409D1AD6135100DB2F7C /* TrainingViewController.m */; };
+		EFB9A4D41ADB087300C44AF1 /* SpellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9A4D31ADB087300C44AF1 /* SpellModel.m */; };
+		EFB9A4D71ADB08D300C44AF1 /* Spell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9A4D61ADB08D300C44AF1 /* Spell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,10 @@
 		68F7409A1AD6130300DB2F7C /* ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewController.m; sourceTree = "<group>"; };
 		68F7409C1AD6135100DB2F7C /* TrainingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingViewController.h; sourceTree = "<group>"; };
 		68F7409D1AD6135100DB2F7C /* TrainingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingViewController.m; sourceTree = "<group>"; };
+		EFB9A4D21ADB087300C44AF1 /* SpellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpellModel.h; sourceTree = "<group>"; };
+		EFB9A4D31ADB087300C44AF1 /* SpellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpellModel.m; sourceTree = "<group>"; };
+		EFB9A4D51ADB08D300C44AF1 /* Spell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spell.h; sourceTree = "<group>"; };
+		EFB9A4D61ADB08D300C44AF1 /* Spell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,10 @@
 				68F740681AD5DDCE00DB2F7C /* AppDelegate.h */,
 				68F740691AD5DDCE00DB2F7C /* AppDelegate.m */,
 				68F7406E1AD5DDCE00DB2F7C /* Main.storyboard */,
+				EFB9A4D21ADB087300C44AF1 /* SpellModel.h */,
+				EFB9A4D31ADB087300C44AF1 /* SpellModel.m */,
+				EFB9A4D51ADB08D300C44AF1 /* Spell.h */,
+				EFB9A4D61ADB08D300C44AF1 /* Spell.m */,
 				68F7408A1AD60F7C00DB2F7C /* TrainingTableViewController.h */,
 				68F7408B1AD60F7C00DB2F7C /* TrainingTableViewController.m */,
 				68F7409C1AD6135100DB2F7C /* TrainingViewController.h */,
@@ -198,6 +208,7 @@
 				TargetAttributes = {
 					68F740601AD5DDCE00DB2F7C = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = APD62CDC25;
 					};
 					68F740791AD5DDCE00DB2F7C = {
 						CreatedOnToolsVersion = 6.2;
@@ -251,12 +262,14 @@
 			files = (
 				68F7408F1AD6101200DB2F7C /* SpellTableViewCell.m in Sources */,
 				68F7409B1AD6130300DB2F7C /* ResultsTableViewController.m in Sources */,
+				EFB9A4D71ADB08D300C44AF1 /* Spell.m in Sources */,
 				68F7406A1AD5DDCE00DB2F7C /* AppDelegate.m in Sources */,
 				68F740981AD612E700DB2F7C /* AlgorithmsTableViewController.m in Sources */,
 				68F740671AD5DDCE00DB2F7C /* main.m in Sources */,
 				68F740921AD610E600DB2F7C /* ResultsTableViewCell.m in Sources */,
 				68F740951AD612B800DB2F7C /* TestingViewController.m in Sources */,
 				68F7409E1AD6135100DB2F7C /* TrainingViewController.m in Sources */,
+				EFB9A4D41ADB087300C44AF1 /* SpellModel.m in Sources */,
 				68F7408C1AD60F7C00DB2F7C /* TrainingTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,7 +394,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Assignment6/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -391,7 +406,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Assignment6/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -450,6 +467,7 @@
 				68F740861AD5DDCE00DB2F7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		68F740871AD5DDCE00DB2F7C /* Build configuration list for PBXNativeTarget "Assignment6Tests" */ = {
 			isa = XCConfigurationList;
@@ -458,6 +476,7 @@
 				68F740891AD5DDCE00DB2F7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

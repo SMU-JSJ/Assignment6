@@ -10,22 +10,43 @@
 @interface TrainingViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *spellNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *spellTranslationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *spellDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *spellImageView;
 @property (weak, nonatomic) IBOutlet UIButton *castSpellButton;
+
+@property (nonatomic) BOOL casting;
 
 @end
 
 @implementation TrainingViewController
 
+- (void)setCasting:(BOOL)casting {
+    _casting = casting;
+    
+    if (casting == YES) {
+        [self.castSpellButton setTitle:@"Stop Casting" forState:UIControlStateNormal];
+    } else {
+        [self.castSpellButton setTitle:@"Start Casting" forState:UIControlStateNormal];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.spellNameLabel.text = self.spellName;
+    self.spellTranslationLabel.text = self.spellTranslation;
+    self.spellDescriptionLabel.text = self.spellDescription;
+    //[self.spellDescriptionLabel sizeToFit];
+    self.spellImageView.image = [UIImage imageNamed:self.spellName];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)startStopCasting:(UIButton *)sender {
+    if ([sender.currentTitle isEqualToString:@"Start Casting"]) {
+        self.casting = YES;
+    } else {
+        self.casting = NO;
+    }
 }
 
 /*
