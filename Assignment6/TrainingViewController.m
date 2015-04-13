@@ -78,7 +78,7 @@
         data[0] = [NSNumber numberWithDouble:castingTime];
         
         [self sendFeatureArray:data
-                     withLabel:self.spellName];
+                     withLabel:self.spell.name];
         [self.castSpellButton setTitle:@"Start Casting" forState:UIControlStateNormal];
     }
 }
@@ -86,11 +86,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.spellNameLabel.text = self.spellName;
-    self.spellTranslationLabel.text = self.spellTranslation;
-    self.spellDescriptionLabel.text = self.spellDescription;
+    self.spellNameLabel.text = self.spell.name;
+    self.spellTranslationLabel.text = self.spell.translation;
+    self.spellDescriptionLabel.text = self.spell.desc;
     //[self.spellDescriptionLabel sizeToFit];
-    self.spellImageView.image = [UIImage imageNamed:self.spellName];
+    self.spellImageView.image = [UIImage imageNamed:self.spell.name];
     
     self.dsid = @100;
     

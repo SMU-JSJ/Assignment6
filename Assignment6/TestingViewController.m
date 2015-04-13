@@ -6,8 +6,11 @@
 //
 
 #import "TestingViewController.h"
+#import "SpellModel.h"
 
 @interface TestingViewController ()
+
+@property (strong, nonatomic) SpellModel* spellModel;
 
 @property (weak, nonatomic) IBOutlet UITableView *spellTableView;
 
@@ -22,6 +25,14 @@
 
 @implementation TestingViewController
 
+// Gets an instance of the SpellModel class using lazy instantiation
+- (SpellModel*) spellModel {
+    if(!_spellModel)
+        _spellModel = [SpellModel sharedInstance];
+    
+    return _spellModel;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -31,6 +42,68 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    if (section == 0) {
+        return [self.spellModel.attackSpells count];
+    } else if (section == 1) {
+        return [self.spellModel.healingSpells count];
+    } else {
+        return [self.spellModel.defenseSpells count];
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionName;
+    switch (section)
+    {
+        case 0:
+            sectionName = @"Attack Spells";
+            break;
+        case 1:
+            sectionName = @"Healing Spells";
+            break;
+        case 2:
+            sectionName = @"Defense Spells";
+            break;
+        default:
+            sectionName = @"";
+            break;
+    }
+    return sectionName;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpellTableViewCell" forIndexPath:indexPath];
+    
+    // Configure the cell...
+    Spell* spell;
+    if (indexPath.section == 0) {
+        spell = self.spellModel.attackSpells[indexPath.row];
+    } else if (indexPath.section == 1) {
+        spell = self.spellModel.healingSpells[indexPath.row];
+    } else {
+        spell = self.spellModel.defenseSpells[indexPath.row];
+    }
+    
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@ 100px", spell.name]];
+    cell.textLabel.text = spell.name;
+    cell.detailTextLabel.text = spell.translation;
+    
+    return cell;
+}
+
 
 /*
 #pragma mark - Navigation

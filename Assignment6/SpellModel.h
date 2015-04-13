@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Spell.h"
 
 @interface SpellModel : NSObject
 

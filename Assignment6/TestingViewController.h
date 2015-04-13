@@ -7,6 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestingViewController : UIViewController
+@interface TestingViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

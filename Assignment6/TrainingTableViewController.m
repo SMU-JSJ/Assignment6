@@ -7,8 +7,6 @@
 
 #import "TrainingTableViewController.h"
 #import "SpellModel.h"
-#import "Spell.h"
-#import "SpellTableViewCell.h"
 #import "TrainingViewController.h"
 
 @interface TrainingTableViewController ()
@@ -83,7 +81,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    SpellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpellTableViewCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpellTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
     Spell* spell;
@@ -95,9 +93,9 @@
         spell = self.spellModel.defenseSpells[indexPath.row];
     }
     
-    cell.spellImageView.image = [UIImage imageNamed:spell.name];
-    cell.spellNameLabel.text = spell.name;
-    cell.spelLTranslationLabel.text = spell.translation;
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@ 100px", spell.name]];
+    cell.textLabel.text = spell.name;
+    cell.detailTextLabel.text = spell.translation;
     
     return cell;
 }
@@ -123,9 +121,7 @@
         } else {
             spell = self.spellModel.defenseSpells[indexPath.row];
         }
-        vc.spellName = spell.name;
-        vc.spellTranslation = spell.translation;
-        vc.spellDescription = spell.desc;
+        vc.spell = spell;
     }
 }
 

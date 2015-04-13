@@ -7,7 +7,6 @@
 //
 
 #import "SpellModel.h"
-#import "Spell.h"
 
 @implementation SpellModel
 
@@ -28,9 +27,9 @@
     if(!_attackSpells) {
         _attackSpells = [[NSMutableArray alloc] init];
         
-        NSArray* spellNames = @[@"Spell Name 1", @"Spell Name 2", @"Spell Name 3"];
-        NSArray* spellTranslations = @[@"Spell Translation 1", @"Spell Translation 2", @"Spell Translation 3"];
-        NSArray* spellDescriptions = @[@"Spell Description 1", @"Spell Description 2", @"Spell Description 3"];
+        NSArray* spellNames = @[@"Creo Leonem", @"Percutio Cum Fulmini"];
+        NSArray* spellTranslations = @[@"Spell Translation 1", @"Spell Translation 2"];
+        NSArray* spellDescriptions = @[@"Spell Description 1", @"Spell Description 2"];
         
         for (int i = 0; i < [spellNames count]; i++) {
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
@@ -47,9 +46,9 @@
     if(!_healingSpells) {
         _healingSpells = [[NSMutableArray alloc] init];
         
-        NSArray* spellNames = @[@"Mentem Curro", @"Spell Name 5", @"Spell Name 6"];
-        NSArray* spellTranslations = @[@"Heal Mind", @"Spell Translation 5", @"Spell Translation 6"];
-        NSArray* spellDescriptions = @[@"Spell Description 4", @"Spell Description 5", @"Spell Description 6"];
+        NSArray* spellNames = @[@"Corpum Sano", @"Magicum Reddo", @"Mentem Curro"];
+        NSArray* spellTranslations = @[@"Spell Translation 3", @"Spell Translation 4", @"Heal Mind"];
+        NSArray* spellDescriptions = @[@"Spell Description 3", @"Spell Description 4", @"Spell Description 6"];
         
         for (int i = 0; i < [spellNames count]; i++) {
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
@@ -66,9 +65,9 @@
     if(!_defenseSpells) {
         _defenseSpells = [[NSMutableArray alloc] init];
         
-        NSArray* spellNames = @[@"Spell Name 7", @"Spell Name 8", @"Spell Name 9"];
-        NSArray* spellTranslations = @[@"Spell Translation 7", @"Spell Translation 8", @"Spell Translation 9"];
-        NSArray* spellDescriptions = @[@"Spell Description 7", @"Spell Description 8", @"Spell Description 9"];
+        NSArray* spellNames = @[@"Arcesso Vallum Terrae", @"Claudo Animum"];
+        NSArray* spellTranslations = @[@"Spell Translation 6", @"Spell Translation 7"];
+        NSArray* spellDescriptions = @[@"Spell Description 6", @"Spell Description 7"];
         
         for (int i = 0; i < [spellNames count]; i++) {
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
