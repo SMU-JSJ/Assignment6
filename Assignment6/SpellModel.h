@@ -15,6 +15,8 @@
 @property (strong, nonatomic) NSMutableArray* healingSpells;
 @property (strong, nonatomic) NSMutableArray* defenseSpells;
 
+@property (strong, nonatomic) NSNumber* dsid;
+
 + (SpellModel*) sharedInstance;
 
 @end

@@ -18,12 +18,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73b-Nq-vRK">
+                                <rect key="frame" x="0.0" y="449" width="320" height="70"/>
+                                <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="0.5" colorSpace="calibratedRGB"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="350" verticalHuggingPriority="350" horizontalCompressionResistancePriority="850" verticalCompressionResistancePriority="850" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUA-Sq-cKP">
                                 <rect key="frame" x="55" y="457" width="211" height="54"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                 <state key="normal" title="Start Casting">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.25882352939999997" green="0.81960784310000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="0.5" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="startStopCasting:" destination="hKm-dy-9pc" eventType="touchUpInside" id="Ui7-PK-o0b"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="5Ul-yE-Lhz">
                                 <rect key="frame" x="0.0" y="64" width="320" height="385"/>
@@ -62,8 +70,12 @@
                                 <rect key="frame" x="206" y="464" width="38" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
                                 <state key="normal" title="Yes">
+                                    <color key="titleColor" red="0.25882352939999997" green="0.81960784310000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="yesNoClicked:" destination="hKm-dy-9pc" eventType="touchUpInside" id="m4N-Br-D5n"/>
+                                </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="264" horizontalCompressionResistancePriority="751" text="Arcesso vallum terrae?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OE-t9-aMB">
                                 <rect key="frame" x="84" y="457" width="114" height="54"/>
@@ -75,8 +87,12 @@
                                 <rect key="frame" x="268" y="464" width="36" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
                                 <state key="normal" title="No">
+                                    <color key="titleColor" red="0.93333333333333335" green="0.11764705882352941" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="yesNoClicked:" destination="hKm-dy-9pc" eventType="touchUpInside" id="zyP-J8-c5s"/>
+                                </connections>
                             </button>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="Arcesso Vallum Terrae" translatesAutoresizingMaskIntoConstraints="NO" id="ZSK-7t-B4k">
                                 <rect key="frame" x="16" y="457" width="54" height="54"/>
@@ -88,18 +104,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="73b-Nq-vRK" firstAttribute="leading" secondItem="FSo-bM-b7q" secondAttribute="leadingMargin" constant="-16" id="0DT-UQ-gDg"/>
                             <constraint firstItem="5Ul-yE-Lhz" firstAttribute="top" secondItem="gBC-Tk-vYm" secondAttribute="bottom" id="CD9-b3-JHj"/>
                             <constraint firstItem="qpA-bI-Osu" firstAttribute="centerY" secondItem="QUA-Sq-cKP" secondAttribute="centerY" id="CXc-NG-y6j"/>
                             <constraint firstItem="ZSK-7t-B4k" firstAttribute="leading" secondItem="FSo-bM-b7q" secondAttribute="leadingMargin" id="DIU-mb-GFu"/>
                             <constraint firstItem="fh9-mJ-lp1" firstAttribute="top" secondItem="5OE-t9-aMB" secondAttribute="bottom" constant="8" id="EJg-uP-8zY"/>
+                            <constraint firstItem="73b-Nq-vRK" firstAttribute="top" secondItem="5Ul-yE-Lhz" secondAttribute="bottom" id="L1I-ox-cfS"/>
                             <constraint firstItem="QUA-Sq-cKP" firstAttribute="centerY" secondItem="89t-cY-3cr" secondAttribute="centerY" id="M6t-1R-mXy"/>
                             <constraint firstItem="QUA-Sq-cKP" firstAttribute="top" secondItem="5Ul-yE-Lhz" secondAttribute="bottom" constant="8" id="SvF-8g-kPR"/>
                             <constraint firstItem="5OE-t9-aMB" firstAttribute="centerY" secondItem="QUA-Sq-cKP" secondAttribute="centerY" id="T3i-hQ-U1I"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="73b-Nq-vRK" secondAttribute="trailing" constant="-16" id="TI2-eP-vZf"/>
                             <constraint firstItem="5OE-t9-aMB" firstAttribute="top" secondItem="5Ul-yE-Lhz" secondAttribute="bottom" constant="8" id="Tyr-mR-jWb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5Ul-yE-Lhz" secondAttribute="trailing" constant="-16" id="UTs-2p-u8z"/>
                             <constraint firstItem="fh9-mJ-lp1" firstAttribute="top" secondItem="QUA-Sq-cKP" secondAttribute="bottom" constant="8" id="e86-gd-AC9"/>
                             <constraint firstItem="5OE-t9-aMB" firstAttribute="leading" secondItem="ZSK-7t-B4k" secondAttribute="trailing" constant="14" id="gKk-5r-glz"/>
                             <constraint firstAttribute="centerX" secondItem="QUA-Sq-cKP" secondAttribute="centerX" id="hAI-Af-wGz"/>
+                            <constraint firstItem="fh9-mJ-lp1" firstAttribute="top" secondItem="73b-Nq-vRK" secondAttribute="bottom" id="iqB-DF-bg3"/>
                             <constraint firstItem="89t-cY-3cr" firstAttribute="leading" secondItem="5OE-t9-aMB" secondAttribute="trailing" constant="8" id="mBf-Zk-U7j"/>
                             <constraint firstItem="qpA-bI-Osu" firstAttribute="trailing" secondItem="FSo-bM-b7q" secondAttribute="trailingMargin" id="r0R-GP-dJp"/>
                             <constraint firstItem="ZSK-7t-B4k" firstAttribute="top" secondItem="QUA-Sq-cKP" secondAttribute="top" id="wSO-8u-oU1"/>
@@ -233,19 +253,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiY-fI-peQ">
-                                <rect key="frame" x="55" y="456" width="211" height="55"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="YzR-6Z-DZx"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
-                                <state key="normal" title="Start Casting">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="startStopCasting:" destination="LEA-Om-Iup" eventType="touchUpInside" id="cN7-QM-GL2"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arcesso Vallum Terrae" translatesAutoresizingMaskIntoConstraints="NO" id="NhU-8m-blS">
                                 <rect key="frame" x="31" y="189" width="259" height="259"/>
                                 <constraints>
@@ -258,6 +265,20 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiY-fI-peQ">
+                                <rect key="frame" x="55" y="456" width="211" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="YzR-6Z-DZx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
+                                <state key="normal" title="Start Casting">
+                                    <color key="titleColor" red="0.25882352941176473" green="0.81960784313725488" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startStopCasting:" destination="LEA-Om-Iup" eventType="touchUpInside" id="cN7-QM-GL2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

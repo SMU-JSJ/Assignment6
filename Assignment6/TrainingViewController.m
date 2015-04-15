@@ -8,8 +8,9 @@
 #import "TrainingViewController.h"
 #import <CoreMotion/CoreMotion.h>
 #import "RingBuffer.h"
+#import "SpellModel.h"
 
-#define SERVER_URL "http://Jessicas-MacBook-Air.local:8000"
+#define SERVER_URL "http://jsj.floccul.us:8000"
 #define UPDATE_INTERVAL 1/10.0
 
 @interface TrainingViewController () <NSURLSessionTaskDelegate>
@@ -17,6 +18,8 @@
 // for the machine learning session
 @property (strong,nonatomic) NSURLSession *session;
 @property (strong,nonatomic) NSNumber *dsid;
+
+@property (strong, nonatomic) SpellModel* spellModel;
 
 // for storing accelerometer updates
 @property (strong, nonatomic) CMMotionManager *cmMotionManager;
@@ -35,6 +38,14 @@
 @end
 
 @implementation TrainingViewController
+
+// Gets an instance of the SpellModel class using lazy instantiation
+- (SpellModel*) spellModel {
+    if(!_spellModel)
+        _spellModel = [SpellModel sharedInstance];
+    
+    return _spellModel;
+}
 
 -(CMMotionManager*)cmMotionManager{
     if(!_cmMotionManager){
@@ -72,14 +83,15 @@
         self.startCastingTime = [NSDate date];
         [self.ringBuffer reset];
         [self.castSpellButton setTitle:@"Stop Casting" forState:UIControlStateNormal];
+        [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:255/255.f green:51/255.f blue:42/255.f alpha:1] forState:UIControlStateNormal];
     } else {
         double castingTime = fabs([self.startCastingTime timeIntervalSinceNow]);
         NSMutableArray* data = [self.ringBuffer getDataAsVector];
         data[0] = [NSNumber numberWithDouble:castingTime];
         
-        [self sendFeatureArray:data
-                     withLabel:self.spell.name];
+        [self sendFeatureArray:data withLabel:self.spell.name];
         [self.castSpellButton setTitle:@"Start Casting" forState:UIControlStateNormal];
+        [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:67/255.f green:212/255.f blue:89/255.f alpha:1] forState:UIControlStateNormal];
     }
 }
 
@@ -92,7 +104,7 @@
     //[self.spellDescriptionLabel sizeToFit];
     self.spellImageView.image = [UIImage imageNamed:self.spell.name];
     
-    self.dsid = @100;
+    self.dsid = self.spellModel.dsid;
     
     //setup NSURLSession (ephemeral)
     NSURLSessionConfiguration *sessionConfig =
@@ -203,6 +215,7 @@
                                                              NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
                                                              NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
                                                              NSLog(@"received %@ and %@",featuresResponse,labelResponse);
+                                                             [self updateModel];
                                                          }
                                                      }];
     [postTask resume];

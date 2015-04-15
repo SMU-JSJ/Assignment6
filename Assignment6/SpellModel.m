@@ -80,5 +80,13 @@
     return _defenseSpells;
 }
 
+- (NSNumber*) dsid {
+    if (!_dsid) {
+        _dsid = @102;
+    }
+    
+    return _dsid;
+}
+
 
 @end
