@@ -166,7 +166,7 @@
         <scene sceneID="9YS-5D-8M1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MAQ-6U-PEY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Training" id="qBb-JZ-kSp"/>
+                    <tabBarItem key="tabBarItem" title="Training" image="training_30px" id="qBb-JZ-kSp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6q5-8K-e4s">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -316,7 +316,7 @@
         <scene sceneID="T7Y-4j-Ebd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4oU-18-YI8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Results" id="4g6-Rh-Ibb"/>
+                    <tabBarItem key="tabBarItem" title="Results" image="results_30px" id="4g6-Rh-Ibb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bX7-uO-mnt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -399,7 +399,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResultsTableViewCell" textLabel="9ut-LN-ALN" detailTextLabel="hvZ-aY-sGM" imageView="yn6-He-9Kb" style="IBUITableViewCellStyleValue1" id="Bbm-Xt-xCx" customClass="ResultsTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResultsTableViewCell" textLabel="9ut-LN-ALN" detailTextLabel="hvZ-aY-sGM" imageView="yn6-He-9Kb" style="IBUITableViewCellStyleValue1" id="Bbm-Xt-xCx">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bbm-Xt-xCx" id="gvi-3z-pUm">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -438,7 +438,7 @@
         <scene sceneID="v8A-bi-iRc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YVA-dk-Yeu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Testing" id="PTR-N4-atR"/>
+                    <tabBarItem key="tabBarItem" title="Testing" image="testing_30px" id="PTR-N4-atR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yRK-TW-UWm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -456,6 +456,9 @@
     </scenes>
     <resources>
         <image name="Arcesso Vallum Terrae" width="1000" height="1000"/>
+        <image name="results_30px" width="30" height="30"/>
+        <image name="testing_30px" width="30" height="30"/>
+        <image name="training_30px" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
