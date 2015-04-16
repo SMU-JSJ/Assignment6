@@ -9,4 +9,6 @@
 
 @interface ResultsTableViewController : UITableViewController
 
+@property (nonatomic) NSInteger currentAlgorithm;
+
 @end

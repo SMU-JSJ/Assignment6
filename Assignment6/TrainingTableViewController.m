@@ -33,6 +33,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // Make sure the model in the server is reset to KNN
+    [self.spellModel updateModel];
 }
 
 - (void)didReceiveMemoryWarning {

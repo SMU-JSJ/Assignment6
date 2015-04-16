@@ -10,7 +10,6 @@
 #import "RingBuffer.h"
 #import "SpellModel.h"
 
-#define SERVER_URL "http://jsj.floccul.us:8000"
 #define UPDATE_INTERVAL 1/10.0
 
 @interface TrainingViewController () <NSURLSessionTaskDelegate>
@@ -84,14 +83,22 @@
         [self.ringBuffer reset];
         [self.castSpellButton setTitle:@"Stop Casting" forState:UIControlStateNormal];
         [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:255/255.f green:51/255.f blue:42/255.f alpha:1] forState:UIControlStateNormal];
+        
+        // Disable tab bar buttons
+        for (UITabBarItem *tmpTabBarItem in [[self.tabBarController tabBar] items])
+            [tmpTabBarItem setEnabled:NO];
     } else {
         double castingTime = fabs([self.startCastingTime timeIntervalSinceNow]);
         NSMutableArray* data = [self.ringBuffer getDataAsVector];
         data[0] = [NSNumber numberWithDouble:castingTime];
         
-        [self sendFeatureArray:data withLabel:self.spell.name];
+        [self.spellModel sendFeatureArray:data withLabel:self.spell.name];
         [self.castSpellButton setTitle:@"Start Casting" forState:UIControlStateNormal];
         [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:67/255.f green:212/255.f blue:89/255.f alpha:1] forState:UIControlStateNormal];
+        
+        // Enable tab bar buttons
+        for (UITabBarItem *tmpTabBarItem in [[self.tabBarController tabBar] items])
+            [tmpTabBarItem setEnabled:YES];
     }
 }
 
@@ -105,20 +112,7 @@
     self.spellImageView.image = [UIImage imageNamed:self.spell.name];
     
     self.dsid = self.spellModel.dsid;
-    
-    //setup NSURLSession (ephemeral)
-    NSURLSessionConfiguration *sessionConfig =
-    [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    
-    sessionConfig.timeoutIntervalForRequest = 5.0;
-    sessionConfig.timeoutIntervalForResource = 8.0;
-    sessionConfig.HTTPMaximumConnectionsPerHost = 1;
-    
-    self.session =
-    [NSURLSession sessionWithConfiguration:sessionConfig
-                                  delegate:self
-                             delegateQueue:nil];
-    
+        
     // setup acceleration monitoring
     [self.cmMotionManager startDeviceMotionUpdatesToQueue:self.backQueue withHandler:^(CMDeviceMotion *motion, NSError *error) {
         [_ringBuffer addNewData:motion.userAcceleration.x
@@ -133,7 +127,6 @@
 //            }];
 //        }
     }];
-
 }
 
 //-(void)motionEventOccurred{
@@ -154,74 +147,6 @@
         self.casting = NO;
     }
 }
-
-#pragma mark - HTTP Post and Get Request Methods
-
-- (void)updateModel {
-    // tell the server to train a new model for the given dataset id (dsid)
-    
-    // create a GET request and get the reponse back as NSData
-    NSString *baseURL = [NSString stringWithFormat:@"%s/UpdateModel",SERVER_URL];
-    NSString *query = [NSString stringWithFormat:@"?dsid=%d",[self.dsid intValue]];
-    
-    NSURL *getUrl = [NSURL URLWithString: [baseURL stringByAppendingString:query]];
-    NSURLSessionDataTask *dataTask = [self.session dataTaskWithURL:getUrl
-                                                 completionHandler:^(NSData *data,
-                                                                     NSURLResponse *response,
-                                                                     NSError *error) {
-                                                     if(!error){
-                                                         // we should get back the accuracy of the model
-                                                         NSLog(@"%@",response);
-                                                         NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                         NSLog(@"Accuracy using resubstitution: %@",responseData[@"resubAccuracy"]);
-                                                     }
-                                                 }];
-    [dataTask resume]; // start the task
-}
-
-- (void)sendFeatureArray:(NSArray*)data
-               withLabel:(NSString*)label
-{
-    // Add a data point and a label to the database for the current dataset ID
-    
-    // setup the url
-    NSString *baseURL = [NSString stringWithFormat:@"%s/AddDataPoint",SERVER_URL];
-    NSURL *postUrl = [NSURL URLWithString:baseURL];
-    
-    
-    // make an array of feature data
-    // and place inside a dictionary with the label and dsid
-    NSError *error = nil;
-    NSDictionary *jsonUpload = @{@"feature":data,
-                                 @"label":label,
-                                 @"dsid":self.dsid};
-    
-    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
-    
-    // create a custom HTTP POST request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:requestBody];
-    
-    // start the request, print the responses etc.
-    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                         if(!error){
-                                                             NSLog(@"%@",response);
-                                                             NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                             
-                                                             // we should get back the feature data from the server and the label it parsed
-                                                             NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
-                                                             NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
-                                                             NSLog(@"received %@ and %@",featuresResponse,labelResponse);
-                                                             [self updateModel];
-                                                         }
-                                                     }];
-    [postTask resume];
-    
-}
-
 
 /*
 #pragma mark - Navigation

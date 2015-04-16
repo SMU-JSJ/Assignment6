@@ -7,22 +7,51 @@
 
 #import "AlgorithmsTableViewController.h"
 #import "ResultsTableViewController.h"
+#import "SpellModel.h"
 
 @interface AlgorithmsTableViewController ()
+
+@property (weak, nonatomic) SpellModel* spellModel;
+
+@property (weak, nonatomic) IBOutlet UILabel *detailKNN;
+@property (weak, nonatomic) IBOutlet UILabel *detailSVM;
 
 @end
 
 @implementation AlgorithmsTableViewController
 
+// Gets an instance of the SpellModel class using lazy instantiation
+- (SpellModel*) spellModel {
+    if(!_spellModel)
+        _spellModel = [SpellModel sharedInstance];
+    
+    return _spellModel;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    NSLog(@"knn: %0.2f",[self.spellModel getTotalAccuracy:0]);
+    NSLog(@"svm: %0.2f",[self.spellModel getTotalAccuracy:1]);
+    self.detailKNN.text = [NSString stringWithFormat:@"%0.2f%%",[self.spellModel getTotalAccuracy:0]];
+    self.detailSVM.text = [NSString stringWithFormat:@"%0.2f%%",[self.spellModel getTotalAccuracy:1]];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -55,6 +84,7 @@
         ResultsTableViewController *vc = [segue destinationViewController];
         
         vc.title = cell.textLabel.text;
+        vc.currentAlgorithm = selectedIndexPath.row;
     }
 
 }

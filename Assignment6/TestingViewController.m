@@ -10,7 +10,6 @@
 #import "RingBuffer.h"
 #import "SpellModel.h"
 
-#define SERVER_URL "http://jsj.floccul.us:8000"
 #define UPDATE_INTERVAL 1/10.0
 
 @interface TestingViewController () <NSURLSessionTaskDelegate>
@@ -30,6 +29,8 @@
 @property (strong, nonatomic) CMMotionManager *cmMotionManager;
 @property (strong, nonatomic) NSOperationQueue *backQueue;
 @property (strong, nonatomic) RingBuffer *ringBuffer;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *algorithmButton;
 
 @property (weak, nonatomic) IBOutlet UITableView *spellTableView;
 
@@ -91,6 +92,10 @@
         [self.ringBuffer reset];
         [self.castSpellButton setTitle:@"Stop Casting" forState:UIControlStateNormal];
         [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:255/255.f green:51/255.f blue:42/255.f alpha:1] forState:UIControlStateNormal];
+        
+        // Disable tab bar buttons
+        for (UITabBarItem *tmpTabBarItem in [[self.tabBarController tabBar] items])
+            [tmpTabBarItem setEnabled:NO];
     } else {
         double castingTime = fabs([self.startCastingTime timeIntervalSinceNow]);
         NSMutableArray* data = [self.ringBuffer getDataAsVector];
@@ -103,6 +108,10 @@
         [self.castSpellButton setTitle:@"Predicting..." forState:UIControlStateNormal];
         [self.castSpellButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [self predictFeature:data];
+        
+        // Enable tab bar buttons
+        for (UITabBarItem *tmpTabBarItem in [[self.tabBarController tabBar] items])
+            [tmpTabBarItem setEnabled:YES];
     }
 }
 
@@ -143,7 +152,16 @@
 
 }
 
--(void)dealloc{
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.spellModel.currentAlgorithm == 0) {
+        self.algorithmButton.title = @"KNN";
+    } else {
+        self.algorithmButton.title = @"SVM";
+    }
+}
+
+-(void)dealloc {
     [self.cmMotionManager stopDeviceMotionUpdates];
 }
 
@@ -165,8 +183,35 @@
     self.yesButton.hidden = YES;
     self.noButton.hidden = YES;
     
+    Spell* currentSpell = [self.spellModel getSpellWithName:self.lastLabel];
+    if (currentSpell) {
+        if (self.spellModel.currentAlgorithm == 0) {
+            currentSpell.totalKNN = [NSNumber numberWithInt:[currentSpell.totalKNN intValue]+1];
+        } else {
+            currentSpell.totalSVM = [NSNumber numberWithInt:[currentSpell.totalSVM intValue]+1];
+        }
+    }
+    
     if ([sender.currentTitle isEqualToString:@"Yes"]) {
-        [self sendFeatureArray:self.lastData withLabel:self.lastLabel];
+        [self.spellModel sendFeatureArray:self.lastData withLabel:self.lastLabel];
+        
+        if (currentSpell) {
+            if (self.spellModel.currentAlgorithm == 0) {
+                currentSpell.correctKNN = [NSNumber numberWithInt:[currentSpell.correctKNN intValue]+1];
+            } else {
+                currentSpell.correctSVM = [NSNumber numberWithInt:[currentSpell.correctSVM intValue]+1];
+            }
+        }
+    }
+}
+
+- (IBAction)algorithmButtonClicked:(UIBarButtonItem *)sender {
+    if ([sender.title isEqualToString:@"KNN"]) {
+        self.spellModel.currentAlgorithm = 1;
+        sender.title = @"SVM";
+    } else {
+        self.spellModel.currentAlgorithm = 0;
+        sender.title = @"KNN";
     }
 }
 
@@ -236,78 +281,12 @@
     return cell;
 }
 
-#pragma mark - HTTP Post and Get Request Methods
-
-- (void)updateModel {
-    // tell the server to train a new model for the given dataset id (dsid)
-    
-    // create a GET request and get the reponse back as NSData
-    NSString *baseURL = [NSString stringWithFormat:@"%s/UpdateModel",SERVER_URL];
-    NSString *query = [NSString stringWithFormat:@"?dsid=%d",[self.dsid intValue]];
-    
-    NSURL *getUrl = [NSURL URLWithString: [baseURL stringByAppendingString:query]];
-    NSURLSessionDataTask *dataTask = [self.session dataTaskWithURL:getUrl
-                                                 completionHandler:^(NSData *data,
-                                                                     NSURLResponse *response,
-                                                                     NSError *error) {
-                                                     if(!error){
-                                                         // we should get back the accuracy of the model
-                                                         NSLog(@"%@",response);
-                                                         NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                         NSLog(@"Accuracy using resubstitution: %@",responseData[@"resubAccuracy"]);
-                                                     }
-                                                 }];
-    [dataTask resume]; // start the task
-}
-
-- (void)sendFeatureArray:(NSArray*)data
-               withLabel:(NSString*)label
-{
-    // Add a data point and a label to the database for the current dataset ID
-    
-    // setup the url
-    NSString *baseURL = [NSString stringWithFormat:@"%s/AddDataPoint",SERVER_URL];
-    NSURL *postUrl = [NSURL URLWithString:baseURL];
-    
-    
-    // make an array of feature data
-    // and place inside a dictionary with the label and dsid
-    NSError *error = nil;
-    NSDictionary *jsonUpload = @{@"feature":data,
-                                 @"label":label,
-                                 @"dsid":self.dsid};
-    
-    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
-    
-    // create a custom HTTP POST request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:requestBody];
-    
-    // start the request, print the responses etc.
-    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                         if(!error){
-                                                             NSLog(@"%@",response);
-                                                             NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                             
-                                                             // we should get back the feature data from the server and the label it parsed
-                                                             NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
-                                                             NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
-                                                             NSLog(@"received %@ and %@",featuresResponse,labelResponse);
-                                                             [self updateModel];
-                                                         }
-                                                     }];
-    [postTask resume];
-    
-}
 
 - (void)predictFeature:(NSMutableArray*)featureData {
     // send the server new feature data and request back a prediction of the class
     
     // setup the url
-    NSString *baseURL = [NSString stringWithFormat:@"%s/PredictOne",SERVER_URL];
+    NSString *baseURL = [NSString stringWithFormat:@"%@/PredictOne",self.spellModel.SERVER_URL];
     NSURL *postUrl = [NSURL URLWithString:baseURL];
     
     
@@ -326,27 +305,40 @@
     
     // start the request, print the responses etc.
     NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                         if(!error){
-                                                             NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                             
-                                                             NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
-                                                             labelResponse = [[labelResponse substringToIndex:[labelResponse length] - 2] substringFromIndex:3];
-                                                             self.lastLabel = labelResponse;
-                                                             NSLog(@"%@",labelResponse);
-                                                             
-                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                                 self.castSpellButton.hidden = YES;
-                                                                 self.predictedSpellImageView.hidden = NO;
-                                                                 self.predictedSpellNameLabel.hidden = NO;
-                                                                 self.yesButton.hidden = NO;
-                                                                 self.noButton.hidden = NO;
-                                                                 
-                                                                 self.predictedSpellNameLabel.text = [NSString stringWithFormat:@"%@?", labelResponse];
-                                                                 self.predictedSpellImageView.image = [UIImage imageNamed:labelResponse];
-                                                             });
-                                                         }
-                                                     }];
+         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+             if(!error){
+                 NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
+                 
+                 NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
+                 labelResponse = [[labelResponse substringToIndex:[labelResponse length] - 2] substringFromIndex:3];
+                 self.lastLabel = labelResponse;
+                 NSLog(@"%@",labelResponse);
+                 
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     if ([self.spellModel getSpellWithName:labelResponse]) {
+                         self.castSpellButton.hidden = YES;
+                         self.predictedSpellImageView.hidden = NO;
+                         self.predictedSpellNameLabel.hidden = NO;
+                         self.yesButton.hidden = NO;
+                         self.noButton.hidden = NO;
+                         
+                         self.predictedSpellNameLabel.text = [NSString stringWithFormat:@"%@?", labelResponse];
+                         self.predictedSpellImageView.image = [UIImage imageNamed:labelResponse];
+                     } else {
+                         [self.castSpellButton setTitle:@"Start Casting" forState:UIControlStateNormal];
+                         self.castSpellButton.enabled = YES;
+                         [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:67/255.f green:212/255.f blue:89/255.f alpha:1] forState:UIControlStateNormal];
+                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Spell not found"
+                                                                         message:@"Please train more."
+                                                                        delegate:nil
+                                                               cancelButtonTitle:@"OK"
+                                                               otherButtonTitles:nil];
+                         [alert show];
+                     }
+                     
+                 });
+             }
+         }];
     [postTask resume];
 }
 

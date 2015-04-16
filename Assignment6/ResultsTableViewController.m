@@ -34,6 +34,12 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -94,7 +100,7 @@
     
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@ 100px", spell.name]];
     cell.textLabel.text = spell.name;
-    cell.detailTextLabel.text = @"0%";
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2f%%",[spell getAccuracy:self.currentAlgorithm]];
     
     return cell;
 }

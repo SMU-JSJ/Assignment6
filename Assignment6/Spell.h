@@ -17,6 +17,12 @@
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSString* translation;
 @property (strong, nonatomic) NSString* desc;
+@property (strong, nonatomic) NSNumber* correctKNN;
+@property (strong, nonatomic) NSNumber* totalKNN;
+@property (strong, nonatomic) NSNumber* correctSVM;
+@property (strong, nonatomic) NSNumber* totalSVM;
+
+- (double) getAccuracy:(NSInteger)algorithm;
 
 // add attack/heal/defense points later
 
