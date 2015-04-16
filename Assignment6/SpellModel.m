@@ -17,8 +17,6 @@
 
 @implementation SpellModel
 
-@synthesize currentAlgorithm = _currentAlgorithm;
-
 // Instantiates for the shared instance of the Spell Model class
 + (SpellModel*)sharedInstance {
     static SpellModel* _sharedInstance = nil;
@@ -135,11 +133,7 @@
     return _currentAlgorithm;
 }
 
-- (void)setCurrentAlgorithm:(NSInteger)currentAlgorithm {
-    _currentAlgorithm = currentAlgorithm;
-    [self updateModel];
-}
-
+// Find a Spell object with the given spell name
 - (Spell*) getSpellWithName:(NSString*)spellName {
     for (int i = 0; i < [self.attackSpells count]; i++) {
         Spell* currentSpell = self.attackSpells[i];

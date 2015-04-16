@@ -108,7 +108,6 @@
     self.spellNameLabel.text = self.spell.name;
     self.spellTranslationLabel.text = self.spell.translation;
     self.spellDescriptionLabel.text = self.spell.desc;
-    //[self.spellDescriptionLabel sizeToFit];
     self.spellImageView.image = [UIImage imageNamed:self.spell.name];
     
     self.dsid = self.spellModel.dsid;
@@ -118,23 +117,8 @@
         [_ringBuffer addNewData:motion.userAcceleration.x
                           withY:motion.userAcceleration.y
                           withZ:motion.userAcceleration.z];
-        //NSLog(@"here");
-        //float mag = fabs(motion.userAcceleration.x)+fabs(motion.userAcceleration.y)+fabs(motion.userAcceleration.z);
-        
-//        if (self.casting){ // do this and return immediately
-//            [self.backQueue addOperationWithBlock:^{
-//                [self motionEventOccurred];
-//            }];
-//        }
     }];
 }
-
-//-(void)motionEventOccurred{
-//    // send data to the server with label
-//    [self sendFeatureArray:[self.ringBuffer getDataAsVector]
-//                 withLabel:self.spellName];
-//}
-
 
 -(void)dealloc{
     [self.cmMotionManager stopDeviceMotionUpdates];
@@ -147,15 +131,5 @@
         self.casting = NO;
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

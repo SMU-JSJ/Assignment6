@@ -286,7 +286,12 @@
     // send the server new feature data and request back a prediction of the class
     
     // setup the url
-    NSString *baseURL = [NSString stringWithFormat:@"%@/PredictOne",self.spellModel.SERVER_URL];
+    NSString* baseURL;
+    if (self.spellModel.currentAlgorithm == 0) {
+        baseURL = [NSString stringWithFormat:@"%@/PredictOneKNN",self.spellModel.SERVER_URL];
+    } else {
+        baseURL = [NSString stringWithFormat:@"%@/PredictOneSVM",self.spellModel.SERVER_URL];
+    }
     NSURL *postUrl = [NSURL URLWithString:baseURL];
     
     
@@ -337,6 +342,13 @@
                      }
                      
                  });
+             } else {
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection error"
+                                                                 message:@"Please check your Internet connection."
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles:nil];
+                 [alert show];
              }
          }];
     [postTask resume];
