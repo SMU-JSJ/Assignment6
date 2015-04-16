@@ -25,15 +25,6 @@
     return _spellModel;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -52,11 +43,9 @@
     }
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *sectionName;
-    switch (section)
-    {
+    switch (section) {
         case 0:
             sectionName = @"Attack Spells";
             break;
@@ -77,7 +66,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpellTableViewCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    // Determine which spell goes with this table cell
     Spell* spell;
     if (indexPath.section == 0) {
         spell = self.spellModel.attackSpells[indexPath.row];
@@ -87,13 +76,13 @@
         spell = self.spellModel.defenseSpells[indexPath.row];
     }
     
+    // Configure the cell...
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@ 100px", spell.name]];
     cell.textLabel.text = spell.name;
     cell.detailTextLabel.text = spell.translation;
     
     return cell;
 }
-
 
 #pragma mark - Navigation
 
@@ -103,10 +92,11 @@
     // Pass the selected object to the new view controller.
     BOOL isVC = [[segue destinationViewController] isKindOfClass:[TrainingViewController class]];
     
-    if(isVC) {
+    if (isVC) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         TrainingViewController *vc = [segue destinationViewController];
         
+        // Find the spell associated with the chosen table cell and send it to the VC
         Spell* spell;
         if (indexPath.section == 0) {
             spell = self.spellModel.attackSpells[indexPath.row];

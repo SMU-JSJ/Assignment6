@@ -10,6 +10,7 @@
 
 @implementation Spell
 
+// Synthesize, since both getter and setter are overriden
 @synthesize correctKNN = _correctKNN;
 @synthesize totalKNN = _totalKNN;
 @synthesize correctSVM = _correctSVM;
@@ -45,12 +46,7 @@
     return _correctKNN;
 }
 
-- (void)setCorrect:(NSNumber*)correctKNN {
-    NSLog(@"totalKNN: %@",self.totalKNN);
-    NSLog(@"correctKNN: %@", correctKNN);
-    NSLog(@"totalSVM: %@",self.totalSVM);
-    NSLog(@"correctSVM: %@",self.correctSVM);
-    
+- (void)setCorrectKNN:(NSNumber*)correctKNN {
     _correctKNN = correctKNN;
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@[correctKNN, self.totalKNN, self.correctSVM, self.totalSVM] forKey:self.name];
@@ -70,12 +66,7 @@
     return _totalKNN;
 }
 
-- (void)setTotalKNN:(NSNumber *)totalKNN {
-    NSLog(@"totalKNN: %@",totalKNN);
-    NSLog(@"correctKNN: %@",self.correctKNN);
-    NSLog(@"totalSVM: %@",self.totalSVM);
-    NSLog(@"correctSVM: %@",self.correctSVM);
-
+- (void)setTotalKNN:(NSNumber*)totalKNN {
     _totalKNN = totalKNN;
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@[self.correctKNN, totalKNN, self.correctSVM, self.totalSVM] forKey:self.name];
@@ -95,12 +86,7 @@
     return _correctSVM;
 }
 
-- (void)setCorrectSVM:(NSNumber *)correctSVM {
-    NSLog(@"totalKNN: %@",self.totalKNN);
-    NSLog(@"correctKNN: %@",self.correctKNN);
-    NSLog(@"totalSVM: %@",self.totalSVM);
-    NSLog(@"correctSVM: %@",correctSVM);
-    
+- (void)setCorrectSVM:(NSNumber*)correctSVM {
     _correctSVM = correctSVM;
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@[self.correctKNN, self.totalKNN, correctSVM, self.totalSVM] forKey:self.name];
@@ -120,25 +106,23 @@
     return _totalSVM;
 }
 
-- (void)setTotalSVM:(NSNumber *)totalSVM {
-    NSLog(@"totalKNN: %@",self.totalKNN);
-    NSLog(@"correctKNN: %@",self.correctKNN);
-    NSLog(@"totalSVM: %@",totalSVM);
-    NSLog(@"correctSVM: %@",self.correctSVM);
-    
+- (void)setTotalSVM:(NSNumber*)totalSVM {
     _totalSVM = totalSVM;
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@[self.correctKNN, self.totalKNN, self.correctSVM, totalSVM] forKey:self.name];
     [defaults synchronize];
 }
 
-- (double) getAccuracy:(NSInteger)algorithm {
+// Function for getting the prediction accuracy of this spell under a certain algorithm
+- (double)getAccuracy:(NSInteger)algorithm {
     if (algorithm == 0) {
-        if([self.totalKNN intValue] == 0) {
+        // K-Nearest Neighbors
+        if ([self.totalKNN intValue] == 0) {
             return 0;
         }
         return (double)[self.correctKNN intValue]/[self.totalKNN intValue] * 100;
     } else {
+        // Support Vector Machine
         if([self.totalSVM intValue] == 0) {
             return 0;
         }
