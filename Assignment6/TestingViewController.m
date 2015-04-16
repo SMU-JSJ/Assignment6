@@ -159,6 +159,7 @@
     } else {
         self.algorithmButton.title = @"SVM";
     }
+    [self.spellModel updateModel];
 }
 
 -(void)dealloc {

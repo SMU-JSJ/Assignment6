@@ -17,6 +17,8 @@
 
 @implementation SpellModel
 
+@synthesize currentAlgorithm = _currentAlgorithm;
+
 // Instantiates for the shared instance of the Spell Model class
 + (SpellModel*)sharedInstance {
     static SpellModel* _sharedInstance = nil;
@@ -70,6 +72,12 @@
         _currentAlgorithm = 0;
     }
     return _currentAlgorithm;
+}
+
+// Also update the trained model for the current algorithm when it's set
+- (void)setCurrentAlgorithm:(NSInteger)currentAlgorithm {
+    _currentAlgorithm = currentAlgorithm;
+    [self updateModel];
 }
 
 // Create the array of attack spells if needed, and populates with names,
@@ -272,10 +280,6 @@
                  NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
                  NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
                  NSLog(@"received %@ and %@",featuresResponse,labelResponse);
-                 
-                 // After this new labeled feature is added to the database,
-                 // automatically retrain the model
-                 [self updateModel];
              }
          }];
     [postTask resume];
