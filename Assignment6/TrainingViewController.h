@@ -1,4 +1,4 @@
-//
+//  Team JSJ - Jordan Kayse, Jessica Yeh, Story Zanetti
 //  TrainingViewController.h
 //  Assignment6
 //

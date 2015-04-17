@@ -1,4 +1,4 @@
-//
+//  Team JSJ - Jordan Kayse, Jessica Yeh, Story Zanetti
 //  AlgorithmsTableViewController.h
 //  Assignment6
 //
