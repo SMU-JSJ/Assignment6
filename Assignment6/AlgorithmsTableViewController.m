@@ -28,34 +28,19 @@
     return _spellModel;
 }
 
+//Called when the view loads the first time
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+//Called every time the view appears
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    NSLog(@"knn: %0.2f",[self.spellModel getTotalAccuracy:0]);
-    NSLog(@"svm: %0.2f",[self.spellModel getTotalAccuracy:1]);
+    //Sets the overall accuracuy for the KNN model
     self.detailKNN.text = [NSString stringWithFormat:@"%0.2f%%",[self.spellModel getTotalAccuracy:0]];
+    //Sets the overall accuracuy for the SVM model
     self.detailSVM.text = [NSString stringWithFormat:@"%0.2f%%",[self.spellModel getTotalAccuracy:1]];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -83,6 +68,7 @@
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:selectedIndexPath];
         ResultsTableViewController *vc = [segue destinationViewController];
         
+        //Sets the title of the next table and saves the algorithm selected
         vc.title = cell.textLabel.text;
         vc.currentAlgorithm = selectedIndexPath.row;
     }
